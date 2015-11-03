@@ -9,29 +9,16 @@
 class Solution {
 public:
     void connect(TreeLinkNode *root) {
-      if(root == NULL)
-        return;
-      queue<TreeLinkNode*> myqueue;
-      myqueue.push(root);
-      int count = 0;
-      int right_most_node = 2;
-      while(!myqueue.empty()) {
-          TreeLinkNode* cur_node = myqueue.front();
-          myqueue.pop();
-          TreeLinkNode* next_node;
-          count++;
-          if(count == right_most_node - 1) {
-            next_node = NULL;
-            right_most_node = right_most_node<<1;
-          }
-          else {
-              next_node = myqueue.front();
-          }
-          cur_node->next = next_node;
-          if(cur_node->left)
-            myqueue.push(cur_node->left);
-          if(cur_node->right)
-            myqueue.push(cur_node->right);
-      }
+        if(root == NULL)
+            return;
+        helper(root->left, root->right);
+    }
+    void helper(TreeLinkNode* &node1, TreeLinkNode* &node2) {
+        if(node1 == NULL)
+            return;
+        node1->next = node2;
+        helper(node1->left, node1->right);
+        helper(node1->right, node2->left);
+        helper(node2->left, node2->right);
     }
 };
