@@ -21,9 +21,10 @@ public:
     }
     int hIndex(vector<int>& citations) {
         quick_sort(citations, 0, citations.size()-1);
-        for(int i=0; i<citations; i++) {
-            if(citations[i] )
+        for(int i=0; i<citations.size(); i++) {
+            if(citations[i] <= i)
+                return i;
         }
-        return 0;
+        return citations.size();
     }
 };
